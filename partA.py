@@ -1,4 +1,5 @@
 import re
+import sys
 
 def tokenize(text_file_path: str) -> list:
     """
@@ -68,15 +69,17 @@ def print_frequencies(frequencies: dict) -> None:
 
     :param frequencies: dict, mapping each token to the number of accurrences.
     """
+    # For sorting dictionary in key ASCII value referred to: https://aiday.tistory.com/132, https://jeongmin-lee.tistory.com/82
+    frequencies = dict(sorted(frequencies.items(), key=lambda x: (-x[1], x[0])))
 
     # With the given dictionary 'frequencies', print key-value.
     for key, value in frequencies.items():
         print(key,"-",value)
 
-"""
+
 if __name__ == '__main__':
-    print("Part A Start")
-    token1 = tokenize("long2.txt")
+    token1 = tokenize(sys.argv[1])
+   # token1 = tokenize("input_file_1.txt")
     compute = compute_word_frequency(token1)
     print_frequencies(compute)
-"""
+
